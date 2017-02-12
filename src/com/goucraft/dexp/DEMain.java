@@ -13,5 +13,6 @@ public class DEMain extends JavaPlugin {
         getLogger().info(ChatColor.RED + "接小中型插件定制");
         getLogger().info(ChatColor.RED + "联系方式QQ:775659148");
         getLogger().info(ChatColor.RED + "======================");
+        getServer().getScheduler().runTaskTimer(this,new Timers(),0L,20L);
     }
 }
