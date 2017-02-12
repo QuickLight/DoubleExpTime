@@ -129,24 +129,25 @@ public class DEMain extends JavaPlugin {
             if (economy.has(args[1], money)) {
                 economy.withdrawPlayer(args[1], money);
                 sender.sendMessage("扣费成功已为" + args[1] + "开启" + args[2] + "倍经验" + "持续" + args[3] + "分钟");
+                if (c.isDouble(p)) {
+                    c.addTime(p, time*60);
+                } else {
+                    c.adds(p, times, time*60);
+                }
             } else {
                 sender.sendMessage("扣费失败");
             }
-           /* //预计扣的钱
-            if (*//*有足够的钱*//*true) {
-                //扣钱
-                if (c.isDouble(p)) {
-                    c.addTime(p, time);
-                } else {
-                    c.adds(p, times, time);
-                }
-            }*/
             return true;
         }
         if (args[4].equalsIgnoreCase("1")) {
             //预计扣的钱
             if (playerPoints.getAPI().take(args[1], money)) {
                 sender.sendMessage("扣费成功已为" + args[1] + "开启" + args[2] + "倍经验" + "持续" + args[3] + "分钟");
+                if (c.isDouble(p)) {
+                    c.addTime(p, time*60);
+                } else {
+                    c.adds(p, times, time*60);
+                }
             } else {
                 sender.sendMessage("扣费失败");
             }
