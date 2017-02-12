@@ -4,3 +4,7 @@ version: 0.1
 softdepend: [PlayerPoints,SQLibrary]
 commands:
   dexp:
+    description: 多倍经验
+    aliases: [xp]
+    usage: |
+      &6&l/dexp playername [倍数] [时间] [方式]    -设置玩家多倍经验
