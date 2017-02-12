@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * Created by Administrator on 2017/2/12.
  */
-public class Configs {
+public class Tools {
     private static HashMap<Player, Integer> map_time = new HashMap<>();
     //剩余时间
     private static HashMap<Player, Integer> map_times = new HashMap<>();

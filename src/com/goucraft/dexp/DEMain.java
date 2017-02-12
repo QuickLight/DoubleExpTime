@@ -77,7 +77,7 @@ public class DEMain extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player p = Bukkit.getPlayer(args[1]);
-        Configs c = new Configs();
+        Tools c = new Tools();
         int time = 0;
         int times = 0;
         int money = 0;
@@ -126,26 +126,29 @@ public class DEMain extends JavaPlugin {
             }
         }
         if (args[4].equalsIgnoreCase("0")) {
-            //预计扣的钱
-            if (/*有足够的钱*/true) {
-                //扣钱
-                if(c.isDouble(p)){
-                    c.addTime(p,time);
-                }else{
-                    c.adds(p,times,time);
-                }
+            if (economy.has(args[1], money)) {
+                economy.withdrawPlayer(args[1], money);
+                sender.sendMessage("扣费成功已为" + args[1] + "开启" + args[2] + "倍经验" + "持续" + args[3] + "分钟");
+            } else {
+                sender.sendMessage("扣费失败");
             }
+           /* //预计扣的钱
+            if (*//*有足够的钱*//*true) {
+                //扣钱
+                if (c.isDouble(p)) {
+                    c.addTime(p, time);
+                } else {
+                    c.adds(p, times, time);
+                }
+            }*/
             return true;
         }
         if (args[4].equalsIgnoreCase("1")) {
             //预计扣的钱
-            if (/*有足够的钱*/true) {
-                //扣钱
-                if(c.isDouble(p)){
-                    c.addTime(p,time);
-                }else{
-                    c.adds(p,times,time);
-                }
+            if (playerPoints.getAPI().take(args[1], money)) {
+                sender.sendMessage("扣费成功已为" + args[1] + "开启" + args[2] + "倍经验" + "持续" + args[3] + "分钟");
+            } else {
+                sender.sendMessage("扣费失败");
             }
             return true;
         }
