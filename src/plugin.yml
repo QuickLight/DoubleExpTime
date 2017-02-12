@@ -1,0 +1,6 @@
+name: DoubleExpTime
+main: com.goucraft.dexp.DEMain
+version: 0.1
+softdepend: [PlayerPoints,SQLibrary]
+commands:
+  dexp:
