@@ -3,9 +3,11 @@ package com.goucraft.dexp;
 import net.milkbowl.vault.Vault;
 import net.milkbowl.vault.economy.Economy;
 import org.black_ixx.playerpoints.PlayerPoints;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -74,21 +76,81 @@ public class DEMain extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length > 0) {
-            //dexp set [player] [倍数] [时间] [方式]
-            if (args[0].equalsIgnoreCase("set")) {
-                if (sender.isOp() || sender.hasPermission("dexp.set")) {
-                    if (args[4].equalsIgnoreCase("0")) {
-
-                    } else if (args[4].equalsIgnoreCase("1")) {
-                    } else {
-                        sender.sendMessage("付款方式错误：0-点券付款，1-金币付款");
-                    }
-                } else {
-                    sender.sendMessage("§4§l权限丢失-dexp.set");
-                }
+        Player p = Bukkit.getPlayer(args[1]);
+        Configs c = new Configs();
+        int time = 0;
+        int times = 0;
+        int money = 0;
+        if (!label.equalsIgnoreCase("dexp")) {
+            return true;
+        }
+        if (args.length == 0) {
+            sender.sendMessage("&b /dexp set [player] [倍数] [时间 分钟] [方式]");
+            return true;
+        }
+        //dexp set [player] [倍数] [时间] [方式]
+        if (p == null) {
+            sender.sendMessage("§4错误的玩家名称");
+            return true;
+        }
+        if (Integer.valueOf(args[2]) != null) {
+            times = Integer.valueOf(args[2]);
+        } else {
+            sender.sendMessage("§4错误的倍数");
+            return true;
+        }
+        if (Integer.valueOf(args[2]) != null) {
+            time = Integer.valueOf(args[2]);
+        } else {
+            sender.sendMessage("§4错误的时间");
+            return true;
+        }
+        if (Integer.valueOf(args[5]) != null) {
+            money = Integer.valueOf(args[5]);
+        } else {
+            sender.sendMessage("§4错误的金额");
+            return true;
+        }
+        if (!args[0].equalsIgnoreCase("set")) {
+            sender.sendMessage("&b /dexp set [player] [倍数] [时间] [方式]");
+            return true;
+        }
+        if (!sender.isOp() || sender.hasPermission("dexp.set")) {
+            sender.sendMessage("§4权限不足!");
+            return true;
+        }
+        if (c.isDouble(p)) {
+            if (times != c.getTimes(p)) {
+                sender.sendMessage("§b若要续费请输入相同倍数,或者等待结束");
+                return true;
             }
         }
+        if (args[4].equalsIgnoreCase("0")) {
+            //预计扣的钱
+            if (/*有足够的钱*/true) {
+                //扣钱
+                if(c.isDouble(p)){
+                    c.addTime(p,time);
+                }else{
+                    c.adds(p,times,time);
+                }
+            }
+            return true;
+        }
+        if (args[4].equalsIgnoreCase("1")) {
+            //预计扣的钱
+            if (/*有足够的钱*/true) {
+                //扣钱
+                if(c.isDouble(p)){
+                    c.addTime(p,time);
+                }else{
+                    c.adds(p,times,time);
+                }
+            }
+            return true;
+        }
+        sender.sendMessage("付款方式错误：0-点券付款，1-金币付款");
         return true;
     }
+
 }

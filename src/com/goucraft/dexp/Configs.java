@@ -66,4 +66,10 @@ public class Configs {
         map_time.put(p,map_time.get(p)+time);
     }
     //续费
+    public double getPoint(){
+        return 0.0;
+    }
+    public double getMeony(){
+        return 0.0;
+    }
 }
