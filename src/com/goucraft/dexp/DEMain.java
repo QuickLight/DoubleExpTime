@@ -85,7 +85,7 @@ public class DEMain extends JavaPlugin {
             return true;
         }
         if (args.length == 0) {
-            sender.sendMessage("&b /dexp set [player] [倍数] [时间 分钟] [方式]");
+            sender.sendMessage("&b /dexp set [玩家] [倍数] [时间 分钟] [方式]");
             return true;
         }
         //dexp set [player] [倍数] [时间] [方式]
@@ -130,9 +130,9 @@ public class DEMain extends JavaPlugin {
                 economy.withdrawPlayer(args[1], money);
                 sender.sendMessage("扣费成功已为" + args[1] + "开启" + args[2] + "倍经验" + "持续" + args[3] + "分钟");
                 if (c.isDouble(p)) {
-                    c.addTime(p, time*60);
+                    c.addTime(p, time * 60);
                 } else {
-                    c.adds(p, times, time*60);
+                    c.adds(p, times, time * 60);
                 }
             } else {
                 sender.sendMessage("扣费失败");
@@ -144,9 +144,9 @@ public class DEMain extends JavaPlugin {
             if (playerPoints.getAPI().take(args[1], money)) {
                 sender.sendMessage("扣费成功已为" + args[1] + "开启" + args[2] + "倍经验" + "持续" + args[3] + "分钟");
                 if (c.isDouble(p)) {
-                    c.addTime(p, time*60);
+                    c.addTime(p, time * 60);
                 } else {
-                    c.adds(p, times, time*60);
+                    c.adds(p, times, time * 60);
                 }
             } else {
                 sender.sendMessage("扣费失败");
